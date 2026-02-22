@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from '../../Task';
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -15,5 +15,17 @@ export class TaskItem
 {
   faTimes = faTimes;
   @Input() task?:Task;
+  @Output() onDeleteTask: EventEmitter<Task> = new EventEmitter();
+  @Output() onToggleReminder: EventEmitter<Task> = new EventEmitter();
+
+  onDelete(task: Task | undefined)
+  {
+    this.onDeleteTask.emit(task);
+  }
+
+  onToggle(task: Task | undefined)
+  {
+    this.onToggleReminder.emit(task);
+  }
 
 }
